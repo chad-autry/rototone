@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<RelativeLayout android:id="@+id/title_bar"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical" android:layout_marginBottom="5dp">
+		<Button android:id="@+id/done" android:text="@string/button_confirm"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true" />
+		<TextView android:text="@string/title_edit"
+			android:layout_centerInParent="true" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" />
+		<Button android:id="@+id/add" android:text="@string/button_add"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:layout_alignParentRight="true" />
+	</RelativeLayout>
+
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="vertical" android:layout_marginBottom="5dp">
+		<TextView android:id="@+id/title" android:layout_width="fill_parent"
+			android:focusable="true"
+			android:layout_height="wrap_content" android:background="@layout/rounded_rectangle"
+			android:paddingLeft="5dip" android:paddingTop="5dip"
+			android:paddingRight="5dip" android:paddingBottom="5dip" />
+	</LinearLayout>
+	<ListView android:id="@id/android:list" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_weight="1" />
+	<TextView android:id="@id/android:empty" android:layout_width="wrap_content"
+		android:layout_height="fill_parent" android:text="@string/no_tones"
+		android:layout_weight="1" />
+	<RelativeLayout android:id="@+id/bottom_bar"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginTop="5dp">
+		<CheckBox android:id="@+id/shuffle_cb" android:text="Shuffle"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	</RelativeLayout>
+
+</LinearLayout>

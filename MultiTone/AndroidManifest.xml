@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.emergentgameplay.multitone" android:versionCode="9"
+	android:versionName="1.4">
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.RECEIVE_SMS" /> 
+	<uses-permission android:name="android.permission.READ_CONTACTS" /> 
+	<uses-permission android:name="android.permission.WRITE_CONTACTS" /> 
+	<uses-permission android:name="android.permission.WRITE_SETTINGS" /> 
+
+	<uses-feature android:name="android.hardware.telephony" />
+	
+	<application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@android:style/Theme.NoTitleBar">
+		<activity android:name=".MainList" android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".MultiToneEdit" />
+		<activity android:name=".TitleEdit"/>
+		<activity android:name=".TonePicker"/>
+		<activity android:name=".ContactPicker"/>
+		<receiver android:name="RingtoneChanger" android:exported="true">
+			<intent-filter>
+				<action android:name="android.intent.action.PHONE_STATE" />
+			</intent-filter>
+		</receiver>
+		<service android:name="RingtoneChangerService"/>
+		<receiver android:name="NotificationtoneChanger" android:exported="true">
+			<intent-filter>
+				<action android:name="android.provider.Telephony.SMS_RECEIVED" />
+			</intent-filter>
+		</receiver>
+		<service android:name="NotificationtoneChangerService"/>
+	</application>
+
+	<uses-sdk android:minSdkVersion="5" />
+
+
+</manifest> 
