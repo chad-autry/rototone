@@ -1,0 +1,14 @@
+#summary Splash Screen
+
+= Introduction =
+
+This is Rototone for Android
+
+
+= Details =
+
+You can find Rototone by searching for it
+Only initial check in, haven't checked it back out on another computer and made sure I can get it working yet.
+It was internally called Multitone for awhile, much of the code is still that way.
+
+I have some changes I hope to make to the project soon, so should be seeing some more love and care.
