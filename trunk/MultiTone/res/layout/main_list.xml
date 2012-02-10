@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+    
+	<RelativeLayout android:id="@+id/title_bar"
+		android:layout_width="fill_parent" android:layout_height="wrap_content" >
+		<Button android:id="@+id/button_exit" android:text="@string/button_exit"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+		<TextView android:text="@string/title_playlists" android:layout_centerInParent="true"
+		android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+		<Button android:id="@+id/button_new" android:text="@string/button_new"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true"/>
+	</RelativeLayout >
+	
+	<ListView android:id="@id/android:list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" android:layout_weight="12"/>
+  	<TextView android:id="@id/android:empty"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="12"
+        android:text="@string/no_multitones"/>
+        
+</LinearLayout>
