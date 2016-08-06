@@ -17,7 +17,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.PhoneLookup;
 
-public class ContactsServiceNewApi extends ContactsService{
+public class ContactsServiceApi extends ContactsService{
 
 	@Override
 	public Intent getContactPickerIntent() {
@@ -72,7 +72,7 @@ public class ContactsServiceNewApi extends ContactsService{
 
 		}
 //		if(filter != null && !filter.equals("")){
-//			selection = selection +" and "+ContactsContract.Contacts.DISPLAY_NAME+" LIKE ?"; 
+//			selection = selection +" and "+ContactsContract.Contacts.DISPLAY_NAME+" LIKE ?";
 //		}
 		Cursor cursor = cntx.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, new String[]{ ContactsContract.Contacts._ID,ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.CUSTOM_RINGTONE,ContactsContract.Contacts.LOOKUP_KEY}, selection, values, ContactsContract.Contacts.DISPLAY_NAME);
 		return cursor;
