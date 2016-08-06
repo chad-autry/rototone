@@ -14,18 +14,7 @@ public abstract class ContactsService {
 	private static ContactsService sInstance;
 
 	public static ContactsService getInstance() {
-        if (sInstance == null) {
-            //String className;
-            int sdkVersion = Integer.parseInt(Build.VERSION.SDK);
-            if (sdkVersion < Build.VERSION_CODES.ECLAIR) {
-            	sInstance = new ContactsSerivceOldApi();
-                //className = "ContactsServiceOldApi";
-            } else {
-            	sInstance = new ContactsServiceNewApi();
-                //className = "ContactsServiceNewApi";
-            }
-        }
-        return sInstance;
+        return new ContactsServiceApi();
     }
 	
 	public abstract Intent getContactPickerIntent();

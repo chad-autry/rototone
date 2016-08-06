@@ -1,6 +1,5 @@
 package com.emergentgameplay.multitone;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -15,7 +14,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.support.v4.app.NotificationCompat;
 import android.telephony.SmsMessage;
+
 //import android.util.Log;
 
 public class NotificationtoneChangerService extends Service {
@@ -50,16 +51,16 @@ public class NotificationtoneChangerService extends Service {
 		latestStartId=startId;
 		
 		//Get the SMS message and determine the address
-		Bundle bundle = intent.getExtras();        
-        SmsMessage firstMsgPortion = null;        
+		Bundle bundle = intent.getExtras();
+        SmsMessage firstMsgPortion = null;
         if (bundle != null)
         {
         	String ringingUriPath = null;
         	
         	
             //Get the SMS message and extract the address
-            Object[] pdus = (Object[]) bundle.get("pdus");       
-            firstMsgPortion = SmsMessage.createFromPdu((byte[])pdus[0]);  
+            Object[] pdus = (Object[]) bundle.get("pdus");
+            firstMsgPortion = SmsMessage.createFromPdu((byte[])pdus[0]);
             String address = firstMsgPortion.getOriginatingAddress();
             
             //TODO Email based SMS
@@ -98,8 +99,8 @@ public class NotificationtoneChangerService extends Service {
 //                    notification.setLatestEventInfo(this, contentTitle, contentText, contentIntent);
 //                    //set the default sound
 //                    notification.defaults |= Notification.DEFAULT_SOUND;
-//                    manager.notify(1,notification);   
-//                    
+//                    manager.notify(1,notification);
+//
 //                    manager.cancelAll();
         		}
         		else{
@@ -110,15 +111,23 @@ public class NotificationtoneChangerService extends Service {
  
         }
         else{
+            //Debug notification
         	NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            Notification notification = new Notification(R.drawable.icon,"Bundle Null",System.currentTimeMillis());
+
             CharSequence contentTitle = "Bundle Null";
             CharSequence contentText = "Bundle Null";
             Intent notificationIntent = new Intent(this, MainList.class);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
-            notification.setLatestEventInfo(this, contentTitle, contentText, contentIntent);
-            manager.notify(1,notification);   
+            NotificationCompat.Builder b=new NotificationCompat.Builder(this);
+
+            b.setAutoCancel(true).setDefaults(Notification.DEFAULT_ALL);
+
+            b.setContentTitle(contentTitle)
+            .setContentText(contentText)
+            .setSmallIcon(R.drawable.icon);
+
+            manager.notify(1,b.build());
         }
 		super.onStart(intent, startId);
 		if(startId>=latestStartId){
