@@ -7,3 +7,10 @@ android:
     - tools
     - build-tools-23.0.2
     - android-22
+deploy:
+  provider: releases
+  api_key: $GIT_HUB_OAUTH
+  file: ./build/outputs/apk/rototone-debug.apk
+  skip_cleanup: true
+  on:
+    tags: true
