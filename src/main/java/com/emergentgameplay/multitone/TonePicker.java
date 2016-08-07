@@ -268,7 +268,7 @@ public class TonePicker
 //            Log.e("Ringdroid", "Couldn't start editor");
 //        }
     	Cursor c = mAdapter.getCursor();
-		
+		Bundle bundle = new Bundle();
 		//If this is the first tone to be picked for a list, return what type the tone is
 		if(toneType == MultiTone.TYPE_UNDETERMINED){
 			int isRingtone = c.getInt(c.getColumnIndexOrThrow(MediaStore.Audio.Media.IS_RINGTONE));
