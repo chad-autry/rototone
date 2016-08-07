@@ -10,7 +10,7 @@ android:
 deploy:
   provider: releases
   api_key: $GIT_HUB_OAUTH
-  file: app/build/outputs/apk/app-debug.apk
+  file: rototone/build/outputs/apk/rototone-debug.apk
   skip_cleanup: true
   on:
     tags: true
