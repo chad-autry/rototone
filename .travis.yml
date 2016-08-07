@@ -7,3 +7,9 @@ android:
     - tools
     - build-tools-23.0.2
     - android-23
+deploy:
+  provider: releases
+  file: app/build/outputs/apk/app-debug.apk
+  skip_cleanup: true
+  on:
+    tags: true
