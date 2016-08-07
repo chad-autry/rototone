@@ -267,23 +267,6 @@ public class TonePicker
 //            Log.e("Ringdroid", "Couldn't start editor");
 //        }
     	Cursor c = mAdapter.getCursor();
-		int uriIndex = c.getColumnIndex("\""
-				+ MediaStore.Audio.Media.INTERNAL_CONTENT_URI + "\"");
-		if (uriIndex == -1) {
-			uriIndex = c.getColumnIndex("\""
-					+ MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "\"");
-		}
-		if (uriIndex == -1) {
-			showFinalAlert(getResources().getText(R.string.select_failed));
-			return;
-		}
-		
-		String itemUri = c.getString(uriIndex)
-				+ "/"
-				+ c.getString(c
-						.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-		
-		Bundle bundle = new Bundle();
 		
 		//If this is the first tone to be picked for a list, return what type the tone is
 		if(toneType == MultiTone.TYPE_UNDETERMINED){
@@ -296,8 +279,7 @@ public class TonePicker
 			}
 			
 		}
-		bundle.putParcelable(RingtoneManager.EXTRA_RINGTONE_PICKED_URI,
-				Uri.parse(itemUri));
+		bundle.putParcelable(RingtoneManager.EXTRA_RINGTONE_PICKED_URI, getUri());
 
 		
 		
@@ -451,22 +433,7 @@ public class TonePicker
             	if(tone != null && tone.isPlaying()){
             		tone.stop();
             	}
-        		int uriIndex = c.getColumnIndex("\""
-        				+ MediaStore.Audio.Media.INTERNAL_CONTENT_URI + "\"");
-        		if (uriIndex == -1) {
-        			uriIndex = c.getColumnIndex("\""
-        					+ MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "\"");
-        		}
-        		if (uriIndex == -1) {
-        			showFinalAlert(getResources().getText(R.string.select_failed));
-        			return true;
-        		}
-        		
-        		String itemUri = c.getString(uriIndex)
-        				+ "/"
-        				+ c.getString(c
-        						.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
-        		tone = RingtoneManager.getRingtone(this, Uri.parse(itemUri));
+        		tone = RingtoneManager.getRingtone(this, getUri());
         		tone.setStreamType(AudioManager.STREAM_SYSTEM);
         		tone.play();
                 return true;
@@ -474,7 +441,38 @@ public class TonePicker
         return super.onContextItemSelected(item);
     }
     
-    
+        private int getUriIndex(Cursor c) {
+        int uriIndex;
+        String[] columnNames = {
+                MediaStore.Audio.Media.INTERNAL_CONTENT_URI.toString(),
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI.toString()
+        };
+
+        for (String columnName : Arrays.asList(columnNames)) {
+            uriIndex = c.getColumnIndex(columnName);
+            if (uriIndex >= 0) {
+                return uriIndex;
+            }
+            // On some phones and/or Android versions, the column name includes the double quotes.
+            uriIndex = c.getColumnIndex("\"" + columnName + "\"");
+            if (uriIndex >= 0) {
+                return uriIndex;
+            }
+        }
+        return -1;
+    }
+
+    private Uri getUri(){
+        //Get the uri of the item that is in the row
+        Cursor c = mAdapter.getCursor();
+        int uriIndex = getUriIndex(c);
+        if (uriIndex == -1) {
+            return null;
+        }
+        String itemUri = c.getString(uriIndex) + "/" +
+        c.getString(c.getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
+        return (Uri.parse(itemUri));
+    }
     /*
      * Media may have been added or removed, refresh the list.
      * (non-Javadoc)
