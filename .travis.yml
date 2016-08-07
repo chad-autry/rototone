@@ -9,6 +9,7 @@ android:
     - android-23
 deploy:
   provider: releases
+  api_key: $GIT_HUB_OAUTH
   file: app/build/outputs/apk/app-debug.apk
   skip_cleanup: true
   on:
