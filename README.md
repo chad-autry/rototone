@@ -25,6 +25,5 @@ Rototone is not published to an app store, instead
 * Need to write external storage to create the rotateable tone files
 
 ## Roadmap
-* Refactor and cleanup
 * Create SMS notification instead of just playing sound
 * Add customizeable icon list to SMS notification
